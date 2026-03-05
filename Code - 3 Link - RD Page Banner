@@ -1,477 +1,414 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Race Director Hub | Triathlon Learning</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --navy: #0C2340;
-      --navy-deep: #081A2F;
-      --navy-light: #1A3A5C;
-      --red: #E31837;
-      --red-hover: #FF2244;
-      --white: #FFFFFF;
-      --gray-50: #F7F8FA;
-      --gray-100: #EBEDF2;
-      --gray-200: #D1D5DE;
-      --gray-600: #5A6070;
-      --gold-accent: #C8A951;
-      --shadow-card: 0 4px 24px rgba(12, 35, 64, 0.10), 0 1px 4px rgba(12, 35, 64, 0.06);
-      --shadow-card-hover: 0 12px 40px rgba(12, 35, 64, 0.18), 0 4px 12px rgba(12, 35, 64, 0.10);
-      --transition-smooth: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+<!-- 
+  RACE DIRECTOR HUB — Triathlon Learning
+  Fully self-contained: all styles scoped under .tl-rd-hub
+  Paste this entire block into your page where you want the section to appear.
+  The Google Fonts link can go in your site's <head> if not already loaded.
+-->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ========== ALL STYLES SCOPED TO .tl-rd-hub ========== */
+  .tl-rd-hub *,
+  .tl-rd-hub *::before,
+  .tl-rd-hub *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .tl-rd-hub {
+    --tl-navy: #0C2340;
+    --tl-navy-deep: #081A2F;
+    --tl-navy-light: #1A3A5C;
+    --tl-red: #E31837;
+    --tl-white: #FFFFFF;
+    --tl-gray-600: #5A6070;
+    --tl-shadow-card: 0 4px 24px rgba(12, 35, 64, 0.10), 0 1px 4px rgba(12, 35, 64, 0.06);
+    --tl-shadow-card-hover: 0 12px 40px rgba(12, 35, 64, 0.18), 0 4px 12px rgba(12, 35, 64, 0.10);
+    --tl-ease: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
+    color: var(--tl-navy);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ========== PAGE HEADER ========== */
+  .tl-rd-hub .tl-page-header {
+    background: var(--tl-navy);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tl-rd-hub .tl-page-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(12,35,64,0.97) 0%, rgba(26,58,92,0.90) 50%, rgba(12,35,64,0.95) 100%);
+    z-index: 1;
+  }
+
+  .tl-rd-hub .tl-page-header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image: repeating-linear-gradient(60deg, transparent, transparent 40px, rgba(255,255,255,0.5) 40px, rgba(255,255,255,0.5) 41px);
+    z-index: 1;
+  }
+
+  .tl-rd-hub .tl-header-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 56px 32px 48px;
+    text-align: center;
+  }
+
+  .tl-rd-hub .tl-header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(227, 24, 55, 0.12);
+    border: 1px solid rgba(227, 24, 55, 0.25);
+    border-radius: 100px;
+    padding: 6px 18px;
+    margin-bottom: 20px;
+    animation: tlFadeSlideDown 0.6s ease-out both;
+  }
+
+  .tl-rd-hub .tl-header-badge span {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tl-red);
+  }
+
+  .tl-rd-hub .tl-header-badge .tl-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--tl-red);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .tl-rd-hub .tl-page-header h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--tl-white);
+    line-height: 1.1;
+    margin-bottom: 14px;
+    animation: tlFadeSlideDown 0.6s 0.1s ease-out both;
+  }
+
+  .tl-rd-hub .tl-page-header h1 .tl-accent {
+    color: var(--tl-red);
+  }
+
+  .tl-rd-hub .tl-header-rule {
+    width: 60px;
+    height: 3px;
+    background: var(--tl-red);
+    border: none;
+    margin: 0 auto 16px;
+    border-radius: 2px;
+    animation: tlFadeSlideDown 0.6s 0.2s ease-out both;
+  }
+
+  .tl-rd-hub .tl-page-header p {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 400;
+    animation: tlFadeSlideDown 0.6s 0.3s ease-out both;
+  }
+
+  /* ========== CARDS SECTION ========== */
+  .tl-rd-hub .tl-cards-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 32px 64px;
+  }
+
+  .tl-rd-hub .tl-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  /* ========== CARD ========== */
+  .tl-rd-hub .tl-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--tl-white);
+    box-shadow: var(--tl-shadow-card);
+    transition: box-shadow var(--tl-ease), transform var(--tl-ease);
+    position: relative;
+    animation: tlCardReveal 0.5s ease-out both;
+  }
+
+  .tl-rd-hub .tl-card-link:nth-child(1) { animation-delay: 0.15s; }
+  .tl-rd-hub .tl-card-link:nth-child(2) { animation-delay: 0.25s; }
+  .tl-rd-hub .tl-card-link:nth-child(3) { animation-delay: 0.35s; }
+
+  .tl-rd-hub .tl-card-link:hover {
+    box-shadow: var(--tl-shadow-card-hover);
+    transform: translateY(-6px);
+  }
+
+  .tl-rd-hub .tl-card-link:focus-visible {
+    outline: 3px solid var(--tl-red);
+    outline-offset: 3px;
+  }
+
+  /* Image area */
+  .tl-rd-hub .tl-card-img {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--tl-navy);
+  }
+
+  .tl-rd-hub .tl-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .tl-rd-hub .tl-card-link:hover .tl-card-img img {
+    transform: scale(1.06);
+  }
+
+  /* Navy blue transparent wash over image */
+  .tl-rd-hub .tl-card-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(12, 35, 64, 0.35);
+    pointer-events: none;
+    transition: background var(--tl-ease);
+  }
+
+  .tl-rd-hub .tl-card-link:hover .tl-card-img::after {
+    background: rgba(12, 35, 64, 0.25);
+  }
+
+  /* Category tag */
+  .tl-rd-hub .tl-card-tag {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 2;
+    background: var(--tl-red);
+    color: var(--tl-white);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+
+  /* Card body */
+  .tl-rd-hub .tl-card-body {
+    padding: 24px 24px 28px;
+  }
+
+  .tl-rd-hub .tl-card-body h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    color: var(--tl-navy);
+    margin-bottom: 10px;
+    transition: color var(--tl-ease);
+  }
+
+  .tl-rd-hub .tl-card-link:hover .tl-card-body h3 {
+    color: var(--tl-red);
+  }
+
+  .tl-rd-hub .tl-card-body p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--tl-gray-600);
+    margin-bottom: 18px;
+  }
+
+  /* CTA arrow */
+  .tl-rd-hub .tl-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--tl-red);
+  }
+
+  .tl-rd-hub .tl-card-cta .tl-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(227, 24, 55, 0.08);
+    transition: background var(--tl-ease), transform var(--tl-ease);
+  }
+
+  .tl-rd-hub .tl-card-cta .tl-arrow svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--tl-red);
+    stroke-width: 2.5;
+    fill: none;
+  }
+
+  .tl-rd-hub .tl-card-link:hover .tl-card-cta .tl-arrow {
+    background: var(--tl-red);
+    transform: translateX(3px);
+  }
+
+  .tl-rd-hub .tl-card-link:hover .tl-card-cta .tl-arrow svg {
+    stroke: var(--tl-white);
+  }
+
+  /* Red accent bar at bottom of card */
+  .tl-rd-hub .tl-card-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--tl-red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--tl-ease);
+  }
+
+  .tl-rd-hub .tl-card-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 900px) {
+    .tl-rd-hub .tl-cards-grid {
+      grid-template-columns: 1fr 1fr;
     }
+  }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+  @media (max-width: 600px) {
+    .tl-rd-hub .tl-cards-grid {
+      grid-template-columns: 1fr;
+      gap: 22px;
     }
-
-    body {
-      font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
-      background-color: var(--gray-50);
-      color: var(--navy);
-      -webkit-font-smoothing: antialiased;
+    .tl-rd-hub .tl-header-inner {
+      padding: 40px 20px 36px;
     }
-
-    /* ========== PAGE HEADER ========== */
-    .page-header {
-      background: var(--navy);
-      position: relative;
-      overflow: hidden;
+    .tl-rd-hub .tl-cards-section {
+      padding: 32px 20px 48px;
     }
+  }
 
-    .page-header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(135deg, rgba(12, 35, 64, 0.97) 0%, rgba(26, 58, 92, 0.90) 50%, rgba(12, 35, 64, 0.95) 100%);
-      z-index: 1;
-    }
+  /* ========== ANIMATIONS ========== */
+  @keyframes tlFadeSlideDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-    /* Subtle geometric pattern overlay */
-    .page-header::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      opacity: 0.04;
-      background-image:
-        repeating-linear-gradient(
-          60deg,
-          transparent,
-          transparent 40px,
-          rgba(255,255,255,0.5) 40px,
-          rgba(255,255,255,0.5) 41px
-        );
-      z-index: 1;
-    }
+  @keyframes tlCardReveal {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
 
-    .header-inner {
-      position: relative;
-      z-index: 2;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 56px 32px 48px;
-      text-align: center;
-    }
+<!-- ===== RACE DIRECTOR HUB — DROP THIS INTO YOUR PAGE ===== -->
+<div class="tl-rd-hub">
 
-    .header-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(227, 24, 55, 0.12);
-      border: 1px solid rgba(227, 24, 55, 0.25);
-      border-radius: 100px;
-      padding: 6px 18px;
-      margin-bottom: 20px;
-      animation: fadeSlideDown 0.6s ease-out both;
-    }
-
-    .header-badge span {
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--red);
-    }
-
-    .header-badge .dot {
-      width: 6px;
-      height: 6px;
-      background: var(--red);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .page-header h1 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(2.2rem, 5vw, 3.2rem);
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      text-transform: uppercase;
-      color: var(--white);
-      line-height: 1.1;
-      margin-bottom: 14px;
-      animation: fadeSlideDown 0.6s 0.1s ease-out both;
-    }
-
-    .page-header h1 .accent {
-      color: var(--red);
-    }
-
-    .header-rule {
-      width: 60px;
-      height: 3px;
-      background: var(--red);
-      border: none;
-      margin: 0 auto 16px;
-      border-radius: 2px;
-      animation: fadeSlideDown 0.6s 0.2s ease-out both;
-    }
-
-    .page-header p {
-      font-size: 1.05rem;
-      line-height: 1.65;
-      color: rgba(255, 255, 255, 0.7);
-      max-width: 600px;
-      margin: 0 auto;
-      font-weight: 400;
-      animation: fadeSlideDown 0.6s 0.3s ease-out both;
-    }
-
-    /* ========== CARDS SECTION ========== */
-    .cards-section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 48px 32px 64px;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-
-    /* ========== CARD ========== */
-    .card-link {
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--white);
-      box-shadow: var(--shadow-card);
-      transition:
-        box-shadow var(--transition-smooth),
-        transform var(--transition-smooth);
-      position: relative;
-      animation: cardReveal 0.5s ease-out both;
-    }
-
-    .card-link:nth-child(1) { animation-delay: 0.15s; }
-    .card-link:nth-child(2) { animation-delay: 0.25s; }
-    .card-link:nth-child(3) { animation-delay: 0.35s; }
-
-    .card-link:hover {
-      box-shadow: var(--shadow-card-hover);
-      transform: translateY(-6px);
-    }
-
-    .card-link:focus-visible {
-      outline: 3px solid var(--red);
-      outline-offset: 3px;
-    }
-
-    /* Image area */
-    .card-img {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-      background: var(--navy);
-    }
-
-    .card-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    .card-link:hover .card-img img {
-      transform: scale(1.06);
-    }
-
-    /* Gradient overlay on image */
-    .card-img::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(to top, rgba(12, 35, 64, 0.55), transparent);
-      pointer-events: none;
-    }
-
-    /* Category tag floating on image */
-    .card-tag {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      z-index: 2;
-      background: var(--red);
-      color: var(--white);
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: 4px;
-    }
-
-    /* Placeholder when no image is loaded yet */
-    .card-img .placeholder {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-    }
-
-    .placeholder-icon {
-      width: 56px;
-      height: 56px;
-      opacity: 0.25;
-    }
-
-    /* Card body */
-    .card-body {
-      padding: 24px 24px 28px;
-    }
-
-    .card-body h3 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.01em;
-      line-height: 1.2;
-      color: var(--navy);
-      margin-bottom: 10px;
-      transition: color var(--transition-smooth);
-    }
-
-    .card-link:hover .card-body h3 {
-      color: var(--red);
-    }
-
-    .card-body p {
-      font-size: 0.92rem;
-      line-height: 1.6;
-      color: var(--gray-600);
-      margin-bottom: 18px;
-    }
-
-    /* CTA arrow */
-    .card-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: var(--red);
-    }
-
-    .card-cta .arrow {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: rgba(227, 24, 55, 0.08);
-      transition:
-        background var(--transition-smooth),
-        transform var(--transition-smooth);
-    }
-
-    .card-cta .arrow svg {
-      width: 14px;
-      height: 14px;
-      stroke: var(--red);
-      stroke-width: 2.5;
-      fill: none;
-    }
-
-    .card-link:hover .card-cta .arrow {
-      background: var(--red);
-      transform: translateX(3px);
-    }
-
-    .card-link:hover .card-cta .arrow svg {
-      stroke: var(--white);
-    }
-
-    /* Red accent bar at bottom of card */
-    .card-link::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--red);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform var(--transition-smooth);
-    }
-
-    .card-link:hover::after {
-      transform: scaleX(1);
-    }
-
-    /* ========== RESPONSIVE ========== */
-    @media (max-width: 900px) {
-      .cards-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .cards-grid {
-        grid-template-columns: 1fr;
-        gap: 22px;
-      }
-      .header-inner {
-        padding: 40px 20px 36px;
-      }
-      .cards-section {
-        padding: 32px 20px 48px;
-      }
-    }
-
-    /* ========== ANIMATIONS ========== */
-    @keyframes fadeSlideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-12px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes cardReveal {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- ===== PAGE HEADER ===== -->
-  <header class="page-header">
-    <div class="header-inner">
-      <div class="header-badge">
-        <span class="dot"></span>
+  <!-- PAGE HEADER -->
+  <header class="tl-page-header">
+    <div class="tl-header-inner">
+      <div class="tl-header-badge">
+        <span class="tl-dot"></span>
         <span>Triathlon Learning</span>
       </div>
-      <h1>Race Director <span class="accent">Hub</span></h1>
-      <hr class="header-rule">
+      <h1>Race Director <span class="tl-accent">Hub</span></h1>
+      <hr class="tl-header-rule">
       <p>Everything you need to plan, manage, and elevate your triathlon events — from operational resources to athlete-facing materials and ready-to-use downloads.</p>
     </div>
   </header>
 
-  <!-- ===== CARDS SECTION ===== -->
-  <section class="cards-section">
-    <div class="cards-grid">
+  <!-- CARDS -->
+  <section class="tl-cards-section">
+    <div class="tl-cards-grid">
 
-      <!-- CARD 1 — Race Director Resources -->
-      <a href="#" class="card-link" aria-label="Race Director Event Resources">
-        <div class="card-img">
-          <!-- REPLACE: swap the <div class="placeholder">…</div> block below with:
-               <img src="YOUR_GITHUB_IMAGE_URL" alt="Race Director Event Resources"> -->
-          <div class="placeholder">
-            <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
-            </svg>
-          </div>
-          <span class="card-tag">Operations</span>
+      <!-- CARD 1 — Race Director Event Resources -->
+      <a href="#" class="tl-card-link" aria-label="Race Director Event Resources">
+        <div class="tl-card-img">
+          <img src="https://raw.githubusercontent.com/JustinTrolle/Triathlon-Learning-Resources-Page-Code/3f251fb495c3542e0e52c05f038287285b465511/Race%20Director%20Event%20Resourse%20Image.png" alt="Race Director Event Resources">
+          <span class="tl-card-tag">Operations</span>
         </div>
-        <div class="card-body">
+        <div class="tl-card-body">
           <h3>Race Director Event Resources</h3>
           <p>Comprehensive guides, best practices, and operational tools to help you plan and execute outstanding triathlon events from start to finish.</p>
-          <span class="card-cta">
+          <span class="tl-card-cta">
             Explore Resources
-            <span class="arrow">
+            <span class="tl-arrow">
               <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </span>
           </span>
         </div>
       </a>
 
-      <!-- CARD 2 — Race Director Athlete Support Materials -->
-      <a href="#" class="card-link" aria-label="Athlete Support Materials for Race Directors">
-        <div class="card-img">
-          <!-- REPLACE: swap the <div class="placeholder">…</div> block below with:
-               <img src="YOUR_GITHUB_IMAGE_URL" alt="Athlete Support Materials for Race Directors"> -->
-          <div class="placeholder">
-            <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
-            </svg>
-          </div>
-          <span class="card-tag">Athlete Support</span>
+      <!-- CARD 2 — Athlete Support Materials for Race Directors -->
+      <a href="#" class="tl-card-link" aria-label="Athlete Support Materials for Race Directors">
+        <div class="tl-card-img">
+          <img src="https://raw.githubusercontent.com/JustinTrolle/Triathlon-Learning-Resources-Page-Code/3f251fb495c3542e0e52c05f038287285b465511/RD%20Athlete%20Suppport%20Image.png" alt="Athlete Support Materials for Race Directors">
+          <span class="tl-card-tag">Athlete Support</span>
         </div>
-        <div class="card-body">
+        <div class="tl-card-body">
           <h3>Athlete Support Materials for Race Directors</h3>
           <p>Ready-made resources and communications you can provide to athletes — from pre-race guides and safety information to post-event engagement tools.</p>
-          <span class="card-cta">
+          <span class="tl-card-cta">
             View Materials
-            <span class="arrow">
+            <span class="tl-arrow">
               <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </span>
           </span>
         </div>
       </a>
 
-      <!-- CARD 3 — Race Director Downloadable Resources -->
-      <a href="#" class="card-link" aria-label="Downloadable Safety and Event Resources">
-        <div class="card-img">
-          <!-- REPLACE: swap the <div class="placeholder">…</div> block below with:
-               <img src="YOUR_GITHUB_IMAGE_URL" alt="Downloadable Safety and Event Resources"> -->
-          <div class="placeholder">
-            <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-          </div>
-          <span class="card-tag">Downloads</span>
+      <!-- CARD 3 — Downloadable Safety & Event Resources -->
+      <a href="#" class="tl-card-link" aria-label="Downloadable Safety and Event Resources">
+        <div class="tl-card-img">
+          <img src="https://raw.githubusercontent.com/JustinTrolle/Triathlon-Learning-Resources-Page-Code/3f251fb495c3542e0e52c05f038287285b465511/RD%20Downloadable%20Resourse%20image.png" alt="Downloadable Safety and Event Resources">
+          <span class="tl-card-tag">Downloads</span>
         </div>
-        <div class="card-body">
+        <div class="tl-card-body">
           <h3>Downloadable Safety &amp; Event Resources</h3>
           <p>Templates, checklists, signage, and printable documents you can download and customize for your event — ready when you need them.</p>
-          <span class="card-cta">
+          <span class="tl-card-cta">
             Get Downloads
-            <span class="arrow">
+            <span class="tl-arrow">
               <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </span>
           </span>
@@ -481,5 +418,4 @@
     </div>
   </section>
 
-</body>
-</html>
+</div>
