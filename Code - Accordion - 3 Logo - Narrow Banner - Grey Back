@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USA Triathlon Education Video</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #F2F2F2;
+            color: #333333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: #F2F2F2;
+            padding: 20px;
+        }
+
+        /* Section B - Video Title with Logos (Top, Full Width) - Clickable and Sticky */
+        .section-b {
+            background-color: #E8E8E8;
+            padding: 8px 30px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-b:hover {
+            background-color: #DEDEDE;
+        }
+
+        /* Logos Container */
+        .logos-container {
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .logo-container {
+            width: 53px;
+            height: 53px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            max-height: 100%;
+            height: auto;
+            width: auto;
+            display: block;
+        }
+
+        .section-b h1 {
+            font-family: 'Oswald', sans-serif;
+            color: #0C2340;
+            font-size: 1.6em;
+            font-weight: 700;
+            flex-grow: 1;
+            padding-right: 40px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Dropdown Arrow */
+        .section-b::after {
+            content: "▼";
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #E31837;
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .section-b.active::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        /* Content Container - Hidden by Default */
+        .content-wrapper {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .content-wrapper.active {
+            max-height: 5000px;
+        }
+
+        /* Section D - Summary (Now Above the Grid, Full Width) */
+        .section-d {
+            background-color: #E8E8E8;
+            padding: 25px 30px;
+            border-radius: 8px;
+            border-left: 5px solid #E31837;
+            margin-bottom: 20px;
+        }
+
+        .section-d h2 {
+            font-family: 'Oswald', sans-serif;
+            color: #0C2340;
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .section-d p {
+            font-family: 'Open Sans', sans-serif;
+            color: #0C2340;
+            font-size: 1em;
+            line-height: 1.7;
+            font-weight: 700;
+        }
+
+        /* Main Content Grid */
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            min-height: 600px;
+        }
+
+        /* Section A - Video (Left Side) */
+        .section-a {
+            background-color: #E8E8E8;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-a .video-container {
+            width: 100%;
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .section-a iframe,
+        .section-a video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 4px;
+        }
+
+        /* Section C - Bullet Points (Right Side) */
+        .section-c {
+            background-color: #E8E8E8;
+            padding: 30px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-c h2 {
+            font-family: 'Oswald', sans-serif;
+            color: #0C2340;
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #E31837;
+            text-transform: uppercase;
+        }
+
+        .section-c ul {
+            list-style: none;
+            padding: 0;
+            flex-grow: 1;
+        }
+
+        .section-c li {
+            font-family: 'Open Sans', sans-serif;
+            color: #333333;
+            font-size: 1.05em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .section-c li:before {
+            content: "▶";
+            color: #E31837;
+            position: absolute;
+            left: 0;
+            font-size: 0.8em;
+        }
+
+        /* Download Resource Link */
+        .resource-download {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid #DADADA;
+        }
+
+        .resource-download a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #FFFFFF;
+            background-color: #0C2340;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .resource-download a:hover {
+            background-color: #E31837;
+            transform: translateY(-1px);
+        }
+
+        .resource-download a .download-icon {
+            font-size: 1.2em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-b {
+                padding: 6px 20px;
+            }
+
+            .logos-container {
+                gap: 8px;
+            }
+
+            .logo-container {
+                width: 40px;
+                height: 40px;
+            }
+
+            .section-b h1 {
+                font-size: 1.2em;
+                padding-right: 30px;
+            }
+
+            .section-c,
+            .section-d {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-container {
+                width: 33px;
+                height: 33px;
+            }
+
+            .section-b h1 {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Section B: Video Title with Logos - Clickable Accordion (Stays at Top) -->
+        <div class="section-b" onclick="toggleContent(this)">
+            <div class="logos-container">
+                <div class="logo-container">
+                    <!-- LOGO 3: Replace src with your 3rd logo URL -->
+                    <img src="" alt="Logo 3">
+                </div>
+                <div class="logo-container">
+                    <img src="https://raw.githubusercontent.com/JustinTrolle/Coaching-Support-and-Safety/2bb6086c6fd3de89a39964ee8ae51216e7d8f86f/Swimming_logo_uniform_blue.png" 
+                         alt="Swimming Logo">
+                </div>
+                <div class="logo-container">
+                    <img src="https://raw.githubusercontent.com/JustinTrolle/Coaching-Support-and-Safety/7e16ec2502aed64897d154843ed23653a0db3c67/Safety_Logo_transparent.png" 
+                         alt="Safety Logo">
+                </div>
+            </div>
+            <h1>Mastering Your Swim In Water Beach Start</h1>
+        </div>
+
+        <!-- Content Wrapper - Hidden by Default -->
+        <div class="content-wrapper">
+
+            <!-- Summary - Now Above the Video/Key Points -->
+            <div class="section-d">
+                <h2>Summary</h2>
+                <p>
+                    Race swim starts can feel daunting, but strategic positioning makes them easier. Start at the pack edges or wait after the gun to avoid initial chaos. Position yourself opposite the first buoy turn for extra room. Starting behind allows calm progression through the field. The key is staying relaxed and enjoying your swim.
+                </p>
+            </div>
+
+            <!-- Video and Key Points Grid -->
+            <div class="main-content">
+                <div class="section-a">
+                    <div class="video-container">
+                        <iframe src="https://player.vimeo.com/video/1159893197?h=ab4695df10" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>                    
+                    </div>
+                </div>
+
+                <div class="section-c">
+                    <h2>Key Points</h2>
+                    <ul>
+                        <li>Position yourself at the edges of the pack for more space and a cleaner start</li>
+                        <li>Wait a few seconds after the gun to let the initial chaos clear</li>
+                        <li>Start on the opposite side of the first buoy turn for more room</li>
+                        <li>Starting behind the group gives space to work through the field calmly</li>
+                        <li>Focus on staying relaxed and enjoying the swim rather than panicking</li>
+                    </ul>
+
+                    <!-- Download Resource Link -->
+                    <div class="resource-download">
+                        <a href="#" download>
+                            <span class="download-icon">⬇</span> Download Resource Materials
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleContent(element) {
+            const contentWrapper = element.nextElementSibling;
+            contentWrapper.classList.toggle('active');
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
